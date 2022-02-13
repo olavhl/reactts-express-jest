@@ -2,3 +2,5 @@ node_modules/
 .idea
 .env
 coverage
+.parcel-cache
+dist
