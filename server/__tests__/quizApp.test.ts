@@ -28,4 +28,8 @@ describe("The quiz broadcast", () => {
         await request(app).post("/api/quiz/answer").send({id: 974, answer: "answer_c"})
             .expect({result: 'incorrect'})
     })
+
+    it("Responds to missing question", async () => {
+        await request(app).post("/api/quiz/answer").send({id: -1}).expect(404)
+    })
 })
