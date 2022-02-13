@@ -1,8 +1,10 @@
 import express from "express";
 import request from 'supertest';
 import {QuizApp} from "../routes/quizApp";
+import bodyParser from "body-parser";
 
 const app = express()
+app.use(bodyParser.json())
 app.use("/api/quiz", QuizApp)
 
 describe("The quiz broadcast", () => {
@@ -14,5 +16,16 @@ describe("The quiz broadcast", () => {
             category: expect.any(String),
             question: expect.any(String)
         })
+        expect(response.body).not.toHaveProperty("correct_answers")
+    })
+
+    it("Responds to correct answers", async () => {
+        await request(app).post("/api/quiz/answer").send({id: 974, answer: "answer_b"})
+            .expect({result: 'correct'})
+    })
+
+    it("Responds to wrong answers", async () => {
+        await request(app).post("/api/quiz/answer").send({id: 974, answer: "answer_c"})
+            .expect({result: 'incorrect'})
     })
 })
