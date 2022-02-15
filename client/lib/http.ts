@@ -5,3 +5,17 @@ export async function fetchJSON(url: string, options = {}) {
   }
   return await res.json();
 }
+
+export async function postJSON<T = unknown, P = unknown>(
+  url: string,
+  payload: { id: T; answer: P },
+  method = "POST"
+) {
+  return await fetch(url, {
+    method: method,
+    body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+}

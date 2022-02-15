@@ -1,5 +1,5 @@
 export type QuestionType = {
-  id: string;
+  id: number;
   question: string;
   answers: Record<string, string | null>;
   category: string;

@@ -14,18 +14,19 @@ QuizApp.post("/answer", (req, res) => {
   if (!question) {
     return res.sendStatus(404);
   }
-
+  console.log(question.question);
+  /*
   const score = req.signedCookies.score
     ? JSON.parse(req.signedCookies.score)
     : { answered: 0, correct: 0 };
-  score.answered += 1;
+  score.answered += 1;*/
 
   if (isCorrectAnswer(question!, answer)) {
-    score.correct += 1;
-    res.cookie("score", JSON.stringify(score), { signed: true });
+    //score.correct += 1;
+    //res.cookie("score", JSON.stringify(score), { signed: true });
     res.json({ result: "correct" });
   } else {
-    res.cookie("score", JSON.stringify(score), { signed: true });
+    //res.cookie("score", JSON.stringify(score), { signed: true });
     res.json({ result: "incorrect" });
   }
 });

@@ -5,9 +5,16 @@ import { ShowQuestion } from "../components/ShowQuestion";
 
 type Props = {
   getQuestion: Promise<QuestionType | any>;
+  postAnswer: ({
+    answer,
+    id,
+  }: {
+    answer: string;
+    id: number;
+  }) => Promise<Response>;
 };
 
-export function QuestionPage({ getQuestion }: Props) {
+export function QuestionPage({ getQuestion, postAnswer }: Props) {
   const {
     data: question,
     error,
@@ -31,7 +38,7 @@ export function QuestionPage({ getQuestion }: Props) {
   return (
     <>
       <h1>Question</h1>
-      {question && <ShowQuestion question={question} />}
+      {question && <ShowQuestion question={question} postAnswer={postAnswer} />}
     </>
   );
 }
