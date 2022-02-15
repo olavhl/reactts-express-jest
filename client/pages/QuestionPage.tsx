@@ -1,6 +1,7 @@
 import * as React from "react";
 import useFetch from "../lib/useFetch";
 import { QuestionType } from "../types/question";
+import { ShowQuestion } from "../components/ShowQuestion";
 
 type Props = {
   getQuestion: Promise<QuestionType | any>;
@@ -30,7 +31,7 @@ export function QuestionPage({ getQuestion }: Props) {
   return (
     <>
       <h1>Question</h1>
-      <p>{question && question.question}</p>
+      {question && <ShowQuestion question={question} />}
     </>
   );
 }
